@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\..\..\DnSpyCommon.props" />
+
+  <PropertyGroup>
+    <AssemblyName>Microsoft.CodeAnalysis.ExpressionEvaluator</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\..\..\..\dnSpy.snk</AssemblyOriginatorKeyFile>
+    <MakeEverythingPublicAssemblies>Microsoft.CodeAnalysis</MakeEverythingPublicAssemblies>
+    <MakeEverythingPublicIVTString>$(AssemblyName)</MakeEverythingPublicIVTString>
+    <DefineConstants>$(DefineConstants);EXPRESSIONCOMPILER</DefineConstants>
+    <CodeAnalysisRuleSet>..\..\..\..\..\DisableBuggyRoslynAnalyzerThatPreventsCompilingThisProjectRemoveWhenItsNotBuggyAnymore.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\..\Build\MakeEverythingPublic\MakeEverythingPublic.tasks" />
+
+  <ItemGroup Label="Linked Files">
+    <Compile Include="..\..\Test\PdbUtilities\Shared\DateTimeUtilities.cs" Link="Shared\DateTimeUtilities.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\WindowsProxy.winmd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="$(RoslynVersion)" />
+  </ItemGroup>
+
+</Project>
